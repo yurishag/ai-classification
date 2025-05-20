@@ -4,3 +4,5 @@ openai
 pydantic
 pyyaml
 python-dotenv
+pytest
+pytest-asyncio
