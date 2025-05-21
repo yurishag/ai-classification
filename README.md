@@ -1,31 +1,3 @@
-<!-- Prerequisites:
-Python
-OpenAI API Key
-
-1. Clone/copy the repo:
-
-git clone https://github.com/yurishag/ai-classification.git
-cd ai-classification
-
-2. Create a .env in the project root with:
-OPENAI_API_KEY="sk-...your key..."
-
-3. Install dependencies into a virtual environment
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install --no-cache-dir -r requirements.txt
-
-4. Run with Uvicorn
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-
-5. Hit the API:
-- curl -X POST http://localhost:8000/classify/sentiment \
-  -H "Content-Type: application/json" \
-  -d '{"text":"I loved this movie!"}'
-
-  -->
-
-
 # LLM Classifier Microservice
 
 A high-performance, scalable Python microservice that exposes prompt-engineered text classification tasks via a FastAPI HTTP API.  
@@ -85,10 +57,10 @@ llm_classifier_service/
 │
 ├── tests/
 │ ├── test_config.py
-│ ├── test_llm_client.py
+│ ├── test_rate_limiter.py
 │ ├── test_utils.py
-│ └── routers/
-│ └── test_classify_router.py
+│ └── services/
+│ └── test_llm_client.py
 │
 ├── scripts/
 │ └── benchmark.py 

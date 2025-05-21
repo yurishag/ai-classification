@@ -44,8 +44,6 @@ Chosen for its high-performance async support, automatic OpenAPI spec generation
 
 - Unit tests: pytest + pytest-asyncio for config loader, client factory, utils.
 
-- Integration tests: FastAPI’s TestClient with monkeypatch-based LLM stubs to validate endpoints.
-
 
 ### 11. CI/CD Pipeline
 
