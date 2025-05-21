@@ -6,3 +6,7 @@ pyyaml
 python-dotenv
 pytest
 pytest-asyncio
+slowapi
+limits
+redis
+prometheus-client

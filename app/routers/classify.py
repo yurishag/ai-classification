@@ -1,13 +1,15 @@
-from fastapi import APIRouter, HTTPException
-from app.config import load_config
+from fastapi import APIRouter, HTTPException, Request
+from app.config import load_config, settings
 from app.models import ClassificationRequest, ClassificationResponse
 from app.services.llm_client import get_llm_client
 from app.utils import logger
+from app.rate_limiter import limiter
 
 router = APIRouter()
 
 @router.post("/{task_name}", response_model=ClassificationResponse)
-async def classify(task_name: str, req: ClassificationRequest):
+@limiter.limit(settings.rate_limit.default)
+async def classify(request: Request, task_name: str, req: ClassificationRequest):
     cfg = load_config()
     if task_name not in cfg.tasks:
         logger.warning(f"Unknown task: {task_name}")
