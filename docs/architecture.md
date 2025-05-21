@@ -1,3 +1,3 @@
 ## High-Level System Architecture
 
-![Application architecture](assets/architecture.png)
+![Application architecture](assets/high-level-architecture.png)
