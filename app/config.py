@@ -1,3 +1,9 @@
+"""
+app/config.py
+
+Config script to load the config.yaml file and .env and merge the variables
+"""
+
 import yaml
 import logging
 from functools import lru_cache

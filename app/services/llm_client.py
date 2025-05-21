@@ -1,3 +1,9 @@
+"""
+app/services/llm_client.py
+
+Returns an OpenAI LLM client
+"""
+
 import os
 from openai import OpenAI
 from app.config import LLMConfig

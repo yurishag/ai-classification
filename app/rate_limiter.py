@@ -1,3 +1,9 @@
+"""
+app/rate_limiter.py
+
+Creates a rate limiter function that used to limit the number of API calls to the microservice
+"""
+
 import os
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -7,7 +13,6 @@ from dotenv import load_dotenv
 load_dotenv()  
 
 redis_uri = os.getenv(settings.rate_limit.redis_url)
-# storage = redis_uri or "memory://"
 storage = "memory://"
 
 limiter = Limiter(

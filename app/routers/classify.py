@@ -1,3 +1,10 @@
+"""
+app/routers/classify.py
+
+FastAPI router that exposes a single POST endpoint for running text-classification "tasks" via an LLM
+with built-in rate limiting and error handling.
+"""
+
 from fastapi import APIRouter, HTTPException, Request
 from app.config import load_config, settings
 from app.models import ClassificationRequest, ClassificationResponse
