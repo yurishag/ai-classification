@@ -184,4 +184,4 @@ python .\scripts\benchmark.py --url http://localhost:8000/classify/movie_rating 
 ```
 
 ## Documentation
-The [docs](https://github.com/yurishag/ai-classification/tree/main/docs) folder contains detailed information on the architecture of the microservice and the design decisions.
+The [docs](https://github.com/yurishag/ai-classification/tree/main/docs) folder contains detailed information on the architecture and flow of the microservice and the design decisions.
