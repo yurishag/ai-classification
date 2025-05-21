@@ -46,6 +46,8 @@ Built for production readiness with configuration-driven LLM support, rate-limit
 5. [API Reference](#api-reference)  
 6. [Metrics & Tracing](#metrics--tracing)  
 6. [Benchmarking](#benchmarking)  
+7. [Documentation](#documentation)
+
 ---
 
 ## Features
@@ -208,3 +210,6 @@ To test the performance of the microservice by measuring latency and throughput.
 ```bash
 python .\scripts\benchmark.py --url http://localhost:8000/classify/movie_rating --text "This movie is great" --requests 30 --concurrency 10
 ```
+
+## Documentation
+The [docs](https://github.com/yurishag/ai-classification/tree/main/docs) folder contains detailed information on the architecture of the microservice and the design decisions.
