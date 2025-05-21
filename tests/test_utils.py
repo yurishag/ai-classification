@@ -1,28 +1,54 @@
 import logging
-import pytest
-from logging import Logger
-import importlib
+import re
 
-module_name = "app.main"
-mymodule = importlib.import_module(module_name)
-setup_logging = mymodule.setup_logging
-logger = mymodule.logger
+from app.utils import setup_logging, logger
 
-def test_setup_logging_invokes_basicConfig(monkeypatch):
+def pytest_configure(config):
+    
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
+    logging.root.setLevel(logging.NOTSET)
+
+
+def test_setup_logging_calls_basicConfig(monkeypatch):
     called = {}
     def fake_basicConfig(**kwargs):
-        called.update(kwargs)
+        called['kwargs'] = kwargs
     monkeypatch.setattr(logging, 'basicConfig', fake_basicConfig)
+
     setup_logging()
-    assert called.get('format') == '%(asctime)s - %(levelname)s - %(message)s'
-    assert called.get('level') == logging.INFO
 
-def test_logger_instance_and_name():
-    assert isinstance(logger, Logger)
-    assert logger.name == module_name
+    assert 'kwargs' in called, "basicConfig should be called"
+    assert called['kwargs']['format'] == '%(asctime)s - %(levelname)s - %(message)s'
+    assert called['kwargs']['level'] == logging.INFO
 
-def test_logger_info_enabled_after_setup():
+
+def test_logging_output_format_and_level(capsys):
+
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
     setup_logging()
-    assert logger.isEnabledFor(logging.INFO)
-    assert not logger.isEnabledFor(logging.DEBUG)
 
+    test_message = 'hello world'
+    logger.info(test_message)
+
+    captured = capsys.readouterr()
+    err = captured.err.strip()
+
+    pattern = r"\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3} - INFO - hello world"
+    assert re.match(pattern, err), f"Log output '{err}' does not match expected format"
+
+
+def test_logging_level_effective(capsys):
+    
+    for handler in logging.root.handlers[:]:
+        logging.root.removeHandler(handler)
+    setup_logging()
+
+    logger.debug('debug message')
+    logger.info('info message')
+
+    captured = capsys.readouterr()
+    out = captured.err
+    assert 'debug message' not in out
+    assert 'info message' in out
